@@ -2,14 +2,15 @@ package study;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.sun.tools.javac.util.List;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class CalculatorTest {
 
-    private List<String> operator = List.of("+", "-", "*", "/");
+    private List<String> operator = Arrays.asList("+", "-", "*", "/");
 
     @ParameterizedTest
     @CsvSource(value = {"2 + 3 * 4 / 2:10", "5 - 3 * 3 + 1:7"}, delimiter = ':')
