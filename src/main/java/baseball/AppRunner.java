@@ -17,18 +17,19 @@ public class AppRunner {
 
         //숫자 검사
         Judgment judgment = new Judgment();
-        boolean judge = judgment.judge(answer, inputNumber);
+        judgment.judge(answer, inputNumber);
+
 
         //결과
-        Referee referee = new Referee();
-        boolean isSuccess = referee.result();
+//        Referee referee = new Referee();
+//        boolean isSuccess = referee.result(judgment.getBall(), judgment.getStrike());
 
         //재시작 or 종료
-        if (isSuccess) {
-            OutputView.outPrint(OutputView.SYSTEM_END);
-            OutputView.outPrint(OutputView.SYSTEM_REPLAY);
-            inputView.inputRetryOrEnd();
-        }
+//        if (isSuccess) {
+//            OutputView.outPrint(OutputView.SYSTEM_END);
+//            OutputView.outPrint(OutputView.SYSTEM_REPLAY);
+//            inputView.inputRetryOrEnd();
+//        }
 
     }
 

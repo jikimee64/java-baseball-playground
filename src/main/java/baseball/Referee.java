@@ -2,8 +2,12 @@ package baseball;
 
 public class Referee {
 
-    public boolean result(){
-        return true;
-    }
+//    public boolean result(boolean numberFlag){
+//        if(numberFlag){
+//
+//        }
+//        return false;
+//
+//    }
 
 }

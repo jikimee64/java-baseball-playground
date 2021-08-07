@@ -4,19 +4,22 @@ import java.util.List;
 
 public class Judgment {
 
+    public Ball getBall() {
+        return ball;
+    }
+
+    public Strike getStrike() {
+        return strike;
+    }
+
     Ball ball = new Ball(0);
     Strike strike = new Strike(0);
 
-    public boolean judge(List<Integer> answer, List<Integer> inputNumber) {
+    public void judge(List<Integer> answer, List<Integer> inputNumber) {
         for (int inputIndex = 0; inputIndex < inputNumber.size(); inputIndex++) {
             ballCheck(inputNumber.get(inputIndex), answer);
             strikeCheck(inputNumber.get(inputIndex), answer, inputIndex);
         }
-
-        if(strike.getStrike() == 3) {
-            return true;
-        }
-        return false;
     }
 
     private void ballCheck(Integer inputNumber, List<Integer> answer) {

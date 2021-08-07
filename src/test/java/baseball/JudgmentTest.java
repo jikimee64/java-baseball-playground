@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class JudgmentTest {
     Judgment judgment;
@@ -20,9 +23,9 @@ class JudgmentTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3:1,2,3:true", "1,2,3:3,2,1:false", "1,2,3:4,2,3:false"}, delimiter = ':')
-    @DisplayName("스트라이크면 true를, 아니면 false를 반환한다")
-    void judgement(String input, String answer, boolean flag){
+    @MethodSource("provided")
+    @DisplayName("스트라이크와 볼의 개수를 판단한다")
+    void judgement(String input, String answer, int ballCount, int strikeCount){
 
         //given
         List<Integer> inputList = new ArrayList<>();
@@ -36,10 +39,22 @@ class JudgmentTest {
         }
 
         //when
-        boolean result = judgment.judge(answerList, inputList);
+        judgment.judge(answerList, inputList);
+
+        Ball ball = judgment.getBall();
+        Strike strike = judgment.getStrike();
 
         //then
-        assertThat(result).isEqualTo(flag);
+        assertThat(ball.getBall()).isEqualTo(ballCount);
+        assertThat(strike.getStrike()).isEqualTo(strikeCount);
+    }
+
+    private static Stream<Arguments> provided(){
+        return Stream.of(
+            Arguments.of("1,2,3", "1,2,3,", 0, 3),
+            Arguments.of("1,2,3", "3,2,1,", 2, 1),
+            Arguments.of("1,2,3", "4,2,3,", 0, 2)
+        );
     }
 
 }
