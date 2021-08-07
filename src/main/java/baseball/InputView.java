@@ -1,48 +1,55 @@
 package baseball;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
+
     private static final String INPUT = "숫자를 입력해 주세요 : ";
     private static final int MAX_NUMBER = 3;
     private static final Scanner scanner = new Scanner(System.in);
+    List<Integer> integers = new ArrayList<>();
 
-    public void inputRetryOrEnd(){
+    public void inputRetryOrEnd() {
         int inputNumber = scanner.nextInt();
 
-        if(inputNumber == 1){
+        if (inputNumber == 1) {
             Application.main(new String[0]);
         }
 
-        if(inputNumber == 2){
+        if (inputNumber == 2) {
             System.exit(0);
         }
     }
 
-    //TODO: 테스트코드 불가능..?
-    public List<Integer> inputNumber(){
-        int inputNumber = scanner.nextInt();
-        List<Integer> integers = setNumber(inputNumber);
-        while(checkInputNumberSize(integers) ){
-            inputNumber = scanner.nextInt();
+    //TODO: 테스트코드 불가능..? scanner.nextInt()를 어떻게 해야할지..
+    public List<Integer> inputNumber() {
+        OutputView.outPrint(OutputView.INPUT_NUMBER);
+        String inputNumber = scanner.next();
+        integers = setNumber(inputNumber);
+        while (checkInputNumberSize(integers)) {
+            inputNumber();
         }
-       return setNumber(inputNumber);
+        return integers;
     }
 
-    private List<Integer> setNumber(int inputNumber){
+    private List<Integer> setNumber(String inputNumber) {
         List<Integer> list = new ArrayList<>();
-        while(inputNumber > 0){
-            list.add(inputNumber % 10);
-            inputNumber = inputNumber / 10;
+        String[] split = inputNumber.split("");
+        for (String num : split) {
+            list.add(Integer.valueOf(num));
         }
-        return list;
+        return list.stream().distinct().collect(Collectors.toList());
     }
 
-    private boolean checkInputNumberSize(List<Integer> integers){
-        if(integers.size() != MAX_NUMBER){
-            System.out.println("3자리의 숫자 혹은 중복되지 않는 숫자를 입력해주세요.");
+    private boolean checkInputNumberSize(List<Integer> integers) {
+        if (integers.size() != MAX_NUMBER) {
+            OutputView.outPrint(OutputView.NOT_DUPLICATION_AND_EMPTY);
+            OutputView.outPrintLn();
+            integers.clear();
             return true;
         }
         return false;

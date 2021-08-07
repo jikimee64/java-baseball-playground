@@ -49,11 +49,14 @@ class JudgmentTest {
         assertThat(strike.getStrike()).isEqualTo(strikeCount);
     }
 
+    //입력, 정답, 볼개수, 스트라이크 개수
     private static Stream<Arguments> provided(){
         return Stream.of(
+            Arguments.of("7,2,5", "7,2,4,", 0, 2),
             Arguments.of("1,2,3", "1,2,3,", 0, 3),
             Arguments.of("1,2,3", "3,2,1,", 2, 1),
             Arguments.of("1,2,3", "4,2,3,", 0, 2)
+
         );
     }
 

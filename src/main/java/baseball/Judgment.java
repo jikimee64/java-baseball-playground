@@ -4,6 +4,9 @@ import java.util.List;
 
 public class Judgment {
 
+    Ball ball = new Ball(0);
+    Strike strike = new Strike(0);
+
     public Ball getBall() {
         return ball;
     }
@@ -12,14 +15,16 @@ public class Judgment {
         return strike;
     }
 
-    Ball ball = new Ball(0);
-    Strike strike = new Strike(0);
 
     public void judge(List<Integer> answer, List<Integer> inputNumber) {
         for (int inputIndex = 0; inputIndex < inputNumber.size(); inputIndex++) {
             ballCheck(inputNumber.get(inputIndex), answer);
             strikeCheck(inputNumber.get(inputIndex), answer, inputIndex);
         }
+
+        OutputView.outPrint(ball.getBall() + OutputView.BALL + " " +
+            strike.getStrike() + OutputView.STRIKE);
+        OutputView.outPrintLn();
     }
 
     private void ballCheck(Integer inputNumber, List<Integer> answer) {

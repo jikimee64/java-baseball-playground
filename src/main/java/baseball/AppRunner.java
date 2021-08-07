@@ -7,29 +7,24 @@ public class AppRunner {
 
     void process() {
 
+        boolean flag = true;
         //랜덤숫자 생성
-        NumberGenerator numberGenerator = new NumberGenerator();
-        List<Integer> answer = numberGenerator.generator(new Random());
+        NumberGenerator numberGenerator = new NumberGenerator(new Random());
+        List<Integer> answer = numberGenerator.generator();
 
-        //숫자 입력
-        InputView inputView = new InputView();
-        List<Integer> inputNumber = inputView.inputNumber();
+        while(flag) {
+            //숫자 입력
+            InputView inputView = new InputView();
+            List<Integer> inputNumber = inputView.inputNumber();
 
-        //숫자 검사
-        Judgment judgment = new Judgment();
-        judgment.judge(answer, inputNumber);
+            //숫자 검사
+            Judgment judgment = new Judgment();
+            judgment.judge(answer, inputNumber);
 
-
-        //결과
-//        Referee referee = new Referee();
-//        boolean isSuccess = referee.result(judgment.getBall(), judgment.getStrike());
-
-        //재시작 or 종료
-//        if (isSuccess) {
-//            OutputView.outPrint(OutputView.SYSTEM_END);
-//            OutputView.outPrint(OutputView.SYSTEM_REPLAY);
-//            inputView.inputRetryOrEnd();
-//        }
+            //결과
+            Referee referee = new Referee();
+            flag = referee.result(inputView, judgment.getStrike());
+        }
 
     }
 

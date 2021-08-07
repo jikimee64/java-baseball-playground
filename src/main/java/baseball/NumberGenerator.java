@@ -6,27 +6,36 @@ import java.util.Random;
 
 public class NumberGenerator {
 
-    public List<Integer> generator(Random random) {
-        List<Integer> list = new ArrayList<>();
-        int number = random.nextInt(9) + 1; //1 ~ 9
-        while (checkMaxSize(list) && checkDuplication(list, number)) {
-            list.add(number);
+    List<Integer> list = new ArrayList<>();
+    Random random;
+
+    public NumberGenerator(Random random) {
+        this.random = random;
+        list.add(this.random.nextInt(9)+1);
+    }
+
+    public List<Integer> generator() {
+        boolean flag = true;
+        while (flag) {
+            int number = random.nextInt(9) + 1;
+            flag = checkDuplication(list, number);
+            flag = checkMaxSize(list);
         }
         return list;
     }
 
     private boolean checkDuplication(List<Integer> list, int number){
-        if(list.contains(number)){
-            return true;
+        if(!list.contains(number)){
+            list.add(number);
         }
-        return false;
+        return true;
     }
 
     private boolean checkMaxSize(List<Integer> numbers){
-        if(numbers.size() != 3){
-            return true;
+        if(numbers.size() >= 3){
+            return false;
         }
-        return false;
+        return true;
     }
 
 }

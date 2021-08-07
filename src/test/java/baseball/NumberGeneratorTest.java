@@ -14,14 +14,14 @@ class NumberGeneratorTest {
 
     @BeforeEach
     void init(){
-        numberGenerator = new NumberGenerator();
+        numberGenerator = new NumberGenerator(new Random());
     }
 
     @Test
     @DisplayName("랜덤 3자리 숫자를 생성한다. 크기랑 중복값을 검사한다.")
     void generator(){
         Random random = new Random();
-        List<Integer> generator = numberGenerator.generator(random);
+        List<Integer> generator = numberGenerator.generator();
 
         long count = generator.stream()
             .distinct()
