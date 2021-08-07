@@ -2,6 +2,7 @@ package baseball;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +21,7 @@ class NumberGeneratorTest {
     @DisplayName("랜덤 3자리 숫자를 생성한다. 크기랑 중복값을 검사한다.")
     void generator(){
         Random random = new Random();
-        Set<Integer> generator = numberGenerator.generator(random);
+        List<Integer> generator = numberGenerator.generator(random);
 
         long count = generator.stream()
             .distinct()

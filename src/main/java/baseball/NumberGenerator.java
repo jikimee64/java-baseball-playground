@@ -1,21 +1,28 @@
 package baseball;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class NumberGenerator {
 
-    public Set<Integer> generator(Random random) {
-        Set<Integer> list = new HashSet<>();
-        while (checkMaxSize(list)) {
-            int number = random.nextInt(9) + 1; //1 ~ 9
+    public List<Integer> generator(Random random) {
+        List<Integer> list = new ArrayList<>();
+        int number = random.nextInt(9) + 1; //1 ~ 9
+        while (checkMaxSize(list) && checkDuplication(list, number)) {
             list.add(number);
         }
         return list;
     }
 
-    private boolean checkMaxSize(Set<Integer> numbers){
+    private boolean checkDuplication(List<Integer> list, int number){
+        if(list.contains(number)){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkMaxSize(List<Integer> numbers){
         if(numbers.size() != 3){
             return true;
         }
