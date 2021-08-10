@@ -6,10 +6,12 @@ public class Ball {
 
     private final int position;
     private final int ballNo;
+    //private final BallNumber ballNo; //Wrapper 클래스 이용
 
     public Ball(int position, int ballNo) {
         this.position = position;
         this.ballNo = ballNo;
+        //this.ballNo = new BallNumber(ballNo);
     }
 
     public BallStatus play(Ball ball) {
